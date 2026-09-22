@@ -1,0 +1,840 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Gina Scents and Accessories | Kampala, Uganda</title>
+  <meta name="description" content="Premium fragrances, hair accessories, custom saving tins, budget planners, and fashion accessories in Kampala, Uganda.">
+  
+  <!-- Google Fonts & Font Awesome Icons -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Cinzel:wght@500;600;700;800&family=Plus+Jakarta+Sans:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+
+  <style>
+    /* CSS RESET & VARIABLES */
+    :root {
+      --bg-dark: #0a0a0a;
+      --bg-card: #141414;
+      --bg-surface: #1a1a1a;
+      --gold-primary: #d4af37;
+      --gold-light: #f3e5ab;
+      --gold-dark: #aa820a;
+      --gold-gradient: linear-gradient(135deg, #bf953f, #fcf6ba, #b38728, #fbf5b7, #aa771c);
+      --gold-gradient-hover: linear-gradient(135deg, #fcf6ba, #bf953f, #fbf5b7, #b38728, #aa771c);
+      --text-main: #f5f5f5;
+      --text-muted: #a0a0a0;
+      --border-color: rgba(212, 175, 55, 0.25);
+      --font-heading: 'Cinzel', serif;
+      --font-body: 'Plus Jakarta Sans', sans-serif;
+      --sidebar-width: 280px;
+    }
+
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+    }
+
+    html {
+      scroll-behavior: smooth;
+    }
+
+    body {
+      background-color: var(--bg-dark);
+      color: var(--text-main);
+      font-family: var(--font-body);
+      line-height: 1.6;
+      overflow-x: hidden;
+    }
+
+    a {
+      color: inherit;
+      text-decoration: none;
+    }
+
+    img {
+      max-width: 100%;
+      height: auto;
+      display: block;
+    }
+
+    /* TYPOGRAPHY */
+    h1, h2, h3, h4, .brand-font {
+      font-family: var(--font-heading);
+      letter-spacing: 0.5px;
+    }
+
+    .gold-text {
+      background: var(--gold-gradient);
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+    }
+
+    /* HEADER & TOP BAR */
+    header {
+      position: sticky;
+      top: 0;
+      z-index: 1000;
+      background: rgba(10, 10, 10, 0.95);
+      backdrop-filter: blur(12px);
+      border-bottom: 1px solid var(--border-color);
+    }
+
+    .nav-container {
+      max-width: 1300px;
+      margin: 0 auto;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      padding: 0.9rem 1.5rem;
+    }
+
+    .brand-logo {
+      display: flex;
+      align-items: center;
+      gap: 12px;
+    }
+
+    .brand-logo img {
+      width: 44px;
+      height: 44px;
+      border-radius: 50%;
+      border: 2px solid var(--gold-primary);
+      object-fit: cover;
+    }
+
+    .brand-title {
+      font-size: 1.2rem;
+      font-weight: 700;
+      line-height: 1.2;
+    }
+
+    .sidebar-trigger-btn {
+      background: var(--bg-surface);
+      border: 1px solid var(--border-color);
+      color: var(--gold-light);
+      padding: 0.6rem 1.1rem;
+      border-radius: 6px;
+      font-family: var(--font-body);
+      font-size: 0.9rem;
+      font-weight: 600;
+      cursor: pointer;
+      display: flex;
+      align-items: center;
+      gap: 8px;
+      transition: all 0.3s ease;
+    }
+
+    .sidebar-trigger-btn:hover {
+      background: var(--gold-primary);
+      color: #000;
+      border-color: var(--gold-primary);
+    }
+
+    /* PROFESSIONAL OVERLAY & SIDEBAR MENU */
+    .sidebar-overlay {
+      position: fixed;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      background: rgba(0, 0, 0, 0.75);
+      backdrop-filter: blur(4px);
+      z-index: 1050;
+      opacity: 0;
+      visibility: hidden;
+      transition: all 0.3s ease;
+    }
+
+    .sidebar-overlay.active {
+      opacity: 1;
+      visibility: visible;
+    }
+
+    .sidebar {
+      position: fixed;
+      top: 0;
+      right: calc(-1 * var(--sidebar-width));
+      width: var(--sidebar-width);
+      height: 100%;
+      background: var(--bg-card);
+      border-left: 1px solid var(--border-color);
+      z-index: 1100;
+      display: flex;
+      flex-direction: column;
+      justify-content: space-between;
+      transition: right 0.35s cubic-bezier(0.16, 1, 0.3, 1);
+      box-shadow: -10px 0 30px rgba(0, 0, 0, 0.8);
+      padding: 2rem 1.5rem;
+    }
+
+    .sidebar.active {
+      right: 0;
+    }
+
+    .sidebar-header {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      padding-bottom: 1.5rem;
+      border-bottom: 1px solid var(--border-color);
+    }
+
+    .sidebar-title {
+      font-size: 1.1rem;
+      font-weight: 700;
+      color: var(--gold-light);
+      text-transform: uppercase;
+      letter-spacing: 1px;
+    }
+
+    .sidebar-close-btn {
+      background: transparent;
+      border: none;
+      color: var(--text-muted);
+      font-size: 1.2rem;
+      cursor: pointer;
+      transition: color 0.3s ease;
+    }
+
+    .sidebar-close-btn:hover {
+      color: var(--gold-primary);
+    }
+
+    .sidebar-nav {
+      margin-top: 2rem;
+      display: flex;
+      flex-direction: column;
+      gap: 0.5rem;
+    }
+
+    .sidebar-link {
+      display: flex;
+      align-items: center;
+      gap: 12px;
+      padding: 0.85rem 1rem;
+      color: var(--text-main);
+      font-weight: 500;
+      font-size: 0.95rem;
+      border-radius: 8px;
+      border: 1px solid transparent;
+      transition: all 0.3s ease;
+    }
+
+    .sidebar-link i {
+      color: var(--gold-primary);
+      width: 20px;
+      text-align: center;
+      font-size: 1rem;
+    }
+
+    .sidebar-link:hover {
+      background: var(--bg-surface);
+      border-color: var(--border-color);
+      color: var(--gold-light);
+      transform: translateX(-4px);
+    }
+
+    .sidebar-footer {
+      padding-top: 1.5rem;
+      border-top: 1px solid var(--border-color);
+      text-align: center;
+    }
+
+    .sidebar-footer p {
+      font-size: 0.8rem;
+      color: var(--text-muted);
+      margin-bottom: 1rem;
+    }
+
+    /* BUTTONS */
+    .btn {
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      gap: 10px;
+      padding: 0.8rem 1.6rem;
+      border-radius: 30px;
+      font-weight: 600;
+      font-size: 0.95rem;
+      transition: all 0.3s ease;
+      cursor: pointer;
+      border: none;
+    }
+
+    .btn-gold {
+      background: var(--gold-gradient);
+      color: #000;
+      box-shadow: 0 4px 15px rgba(212, 175, 55, 0.3);
+    }
+
+    .btn-gold:hover {
+      transform: translateY(-2px);
+      box-shadow: 0 6px 20px rgba(212, 175, 55, 0.5);
+    }
+
+    .btn-whatsapp {
+      background-color: #25d366;
+      color: #fff;
+    }
+
+    .btn-whatsapp:hover {
+      background-color: #1eb956;
+      transform: translateY(-2px);
+      box-shadow: 0 4px 15px rgba(37, 211, 102, 0.4);
+    }
+
+    .btn-outline {
+      border: 1px solid var(--gold-primary);
+      color: var(--gold-light);
+      background: transparent;
+    }
+
+    .btn-outline:hover {
+      background: var(--gold-primary);
+      color: #000;
+    }
+
+    /* HERO SECTION */
+    .hero {
+      position: relative;
+      padding: 5rem 1.5rem;
+      background: radial-gradient(circle at center, rgba(212, 175, 55, 0.12) 0%, rgba(10, 10, 10, 1) 70%);
+      text-align: center;
+      border-bottom: 1px solid var(--border-color);
+    }
+
+    .hero-content {
+      max-width: 800px;
+      margin: 0 auto;
+    }
+
+    .hero-logo-large {
+      width: 120px;
+      height: 120px;
+      border-radius: 50%;
+      border: 3px solid var(--gold-primary);
+      margin: 0 auto 1.5rem auto;
+      box-shadow: 0 0 30px rgba(212, 175, 55, 0.3);
+      object-fit: cover;
+    }
+
+    .hero h1 {
+      font-size: 2.8rem;
+      margin-bottom: 0.8rem;
+    }
+
+    .hero p {
+      font-size: 1.15rem;
+      color: var(--text-muted);
+      margin-bottom: 2rem;
+    }
+
+    .hero-ctas {
+      display: flex;
+      justify-content: center;
+      gap: 1rem;
+      flex-wrap: wrap;
+    }
+
+    /* SECTION STYLES */
+    section {
+      padding: 4.5rem 1.5rem;
+      max-width: 1200px;
+      margin: 0 auto;
+    }
+
+    .section-header {
+      text-align: center;
+      margin-bottom: 3rem;
+    }
+
+    .section-header h2 {
+      font-size: 2.2rem;
+      margin-bottom: 0.5rem;
+    }
+
+    .section-header p {
+      color: var(--text-muted);
+    }
+
+    /* CATEGORIES GRID */
+    .categories-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+      gap: 1.5rem;
+    }
+
+    .category-card {
+      background: var(--bg-card);
+      border: 1px solid var(--border-color);
+      padding: 2rem 1.5rem;
+      border-radius: 12px;
+      text-align: center;
+      transition: all 0.3s ease;
+    }
+
+    .category-card:hover {
+      transform: translateY(-5px);
+      border-color: var(--gold-primary);
+      box-shadow: 0 8px 25px rgba(212, 175, 55, 0.15);
+    }
+
+    .category-icon {
+      font-size: 2.5rem;
+      color: var(--gold-primary);
+      margin-bottom: 1rem;
+    }
+
+    .category-card h3 {
+      font-size: 1.3rem;
+      margin-bottom: 0.5rem;
+    }
+
+    .category-card p {
+      color: var(--text-muted);
+      font-size: 0.9rem;
+    }
+
+    /* FEATURED PRODUCTS */
+    .products-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+      gap: 2rem;
+    }
+
+    .product-card {
+      background: var(--bg-card);
+      border: 1px solid var(--border-color);
+      border-radius: 12px;
+      overflow: hidden;
+      display: flex;
+      flex-direction: column;
+      transition: all 0.3s ease;
+    }
+
+    .product-card:hover {
+      border-color: var(--gold-primary);
+      box-shadow: 0 10px 30px rgba(0,0,0,0.5);
+    }
+
+    .product-image {
+      position: relative;
+      width: 100%;
+      height: 260px;
+      background: #000;
+      overflow: hidden;
+    }
+
+    .product-image img {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      transition: transform 0.5s ease;
+    }
+
+    .product-card:hover .product-image img {
+      transform: scale(1.05);
+    }
+
+    .product-info {
+      padding: 1.5rem;
+      display: flex;
+      flex-direction: column;
+      flex-grow: 1;
+    }
+
+    .product-title {
+      font-size: 1.15rem;
+      font-weight: 600;
+      margin-bottom: 0.5rem;
+    }
+
+    .product-price {
+      font-size: 1.25rem;
+      font-weight: 700;
+      color: var(--gold-light);
+      margin-bottom: 1.2rem;
+    }
+
+    .product-card .btn {
+      margin-top: auto;
+      width: 100%;
+    }
+
+    /* LOCATION & CONTACT SECTION */
+    .contact-container {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 2.5rem;
+      background: var(--bg-card);
+      border: 1px solid var(--border-color);
+      padding: 2.5rem;
+      border-radius: 16px;
+    }
+
+    .contact-info {
+      display: flex;
+      flex-direction: column;
+      gap: 1.5rem;
+    }
+
+    .contact-item {
+      display: flex;
+      align-items: flex-start;
+      gap: 1rem;
+    }
+
+    .contact-item i {
+      font-size: 1.4rem;
+      color: var(--gold-primary);
+      margin-top: 4px;
+    }
+
+    .social-links {
+      display: flex;
+      gap: 1rem;
+      margin-top: 1rem;
+    }
+
+    .social-btn {
+      width: 42px;
+      height: 42px;
+      border-radius: 50%;
+      border: 1px solid var(--border-color);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      color: var(--gold-light);
+      transition: all 0.3s ease;
+    }
+
+    .social-btn:hover {
+      background: var(--gold-primary);
+      color: #000;
+    }
+
+    .map-container {
+      width: 100%;
+      height: 100%;
+      min-height: 300px;
+      border-radius: 12px;
+      overflow: hidden;
+      border: 1px solid var(--border-color);
+    }
+
+    .map-container iframe {
+      width: 100%;
+      height: 100%;
+      border: 0;
+    }
+
+    /* FOOTER */
+    footer {
+      border-top: 1px solid var(--border-color);
+      padding: 2rem 1.5rem;
+      text-align: center;
+      background: #050505;
+      color: var(--text-muted);
+      font-size: 0.9rem;
+    }
+
+    /* FLOATING WHATSAPP BUTTON */
+    .float-whatsapp {
+      position: fixed;
+      bottom: 25px;
+      right: 25px;
+      background-color: #25d366;
+      color: #fff;
+      width: 60px;
+      height: 60px;
+      border-radius: 50%;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 30px;
+      box-shadow: 0 4px 15px rgba(0,0,0,0.4);
+      z-index: 999;
+      transition: transform 0.3s ease;
+    }
+
+    .float-whatsapp:hover {
+      transform: scale(1.1);
+    }
+
+    /* RESPONSIVE DESIGN */
+    @media (max-width: 768px) {
+      .hero h1 {
+        font-size: 2rem;
+      }
+      .contact-container {
+        grid-template-columns: 1fr;
+      }
+      .map-container {
+        height: 250px;
+      }
+    }
+  </style>
+</head>
+<body>
+
+  <!-- FLOATING WHATSAPP BUTTON -->
+  <a href="https://wa.me/256704217801?text=Hello%20Gina%20Scents,%20I%20would%20like%20to%20make%20an%20inquiry." class="float-whatsapp" target="_blank" aria-label="Order on WhatsApp">
+    <i class="fab fa-whatsapp"></i>
+  </a>
+
+  <!-- NAVIGATION HEADER -->
+  <header>
+    <div class="nav-container">
+      <div class="brand-logo">
+        <img src="https://www.image2url.com/r2/default/images/1790075774866-c7bba1b1-9602-40b1-8223-8ea61f560cea.jpg" alt="Gina Scents Logo">
+        <span class="brand-title gold-text">Gina Scents</span>
+      </div>
+      <button class="sidebar-trigger-btn" onclick="toggleSidebar()" aria-label="Open Navigation Menu">
+        <i class="fas fa-bars"></i>
+        <span>Menu</span>
+      </button>
+    </div>
+  </header>
+
+  <!-- SIDEBAR OVERLAY & MENU -->
+  <div class="sidebar-overlay" id="sidebarOverlay" onclick="toggleSidebar()"></div>
+  <aside class="sidebar" id="sidebarMenu">
+    <div>
+      <div class="sidebar-header">
+        <span class="sidebar-title">Navigation</span>
+        <button class="sidebar-close-btn" onclick="toggleSidebar()" aria-label="Close Menu">
+          <i class="fas fa-times"></i>
+        </button>
+      </div>
+
+      <nav class="sidebar-nav">
+        <a href="#categories" class="sidebar-link" onclick="toggleSidebar()">
+          <i class="fas fa-th-large"></i>
+          <span>Categories</span>
+        </a>
+        <a href="#featured" class="sidebar-link" onclick="toggleSidebar()">
+          <i class="fas fa-star"></i>
+          <span>Featured Products</span>
+        </a>
+        <a href="#contact" class="sidebar-link" onclick="toggleSidebar()">
+          <i class="fas fa-map-marker-alt"></i>
+          <span>Location & Contact</span>
+        </a>
+      </nav>
+    </div>
+
+    <div class="sidebar-footer">
+      <p>Need Quick Assistance?</p>
+      <a href="https://wa.me/256704217801" target="_blank" class="btn btn-whatsapp" style="width: 100%;">
+        <i class="fab fa-whatsapp"></i> Chat on WhatsApp
+      </a>
+    </div>
+  </aside>
+
+  <!-- HERO SECTION -->
+  <section class="hero">
+    <div class="hero-content">
+      <img src="https://www.image2url.com/r2/default/images/1790075774866-c7bba1b1-9602-40b1-8223-8ea61f560cea.jpg" alt="Gina Scents Logo" class="hero-logo-large">
+      <h1 class="gold-text">Gina Scents & Accessories</h1>
+      <p>Kampala’s premier collection of luxury fragrances, double-layered satin hair care, custom savings tins, and essential budget planners.</p>
+      <div class="hero-ctas">
+        <a href="https://wa.me/256704217801?text=Hello%20Gina%20Scents,%20I%20want%20to%20place%20an%20order." target="_blank" class="btn btn-whatsapp">
+          <i class="fab fa-whatsapp"></i> Order on WhatsApp
+        </a>
+        <a href="tel:+256704217801" class="btn btn-outline">
+          <i class="fas fa-phone"></i> Call +256 704 217 801
+        </a>
+      </div>
+    </div>
+  </section>
+
+  <!-- PRODUCT CATEGORIES -->
+  <section id="categories">
+    <div class="section-header">
+      <h2 class="gold-text">Product Categories</h2>
+      <p>Explore our curated collections designed for style, self-care, and financial empowerment.</p>
+    </div>
+    <div class="categories-grid">
+      <div class="category-card">
+        <i class="fas fa-spray-can category-icon"></i>
+        <h3>Perfumes & Scents</h3>
+        <p>Premium long-lasting fragrances and scents for every occasion.</p>
+      </div>
+      <div class="category-card">
+        <i class="fas fa-sparkles category-icon"></i>
+        <h3>Hair Accessories</h3>
+        <p>Double-layered satin bonnets and extra-long bonnets for braids & wigs.</p>
+      </div>
+      <div class="category-card">
+        <i class="fas fa-piggy-bank category-icon"></i>
+        <h3>Savings & Budgeting</h3>
+        <p>Custom saving tins, budget planners, money tracking frames & binders.</p>
+      </div>
+      <div class="category-card">
+        <i class="fas fa-gem category-icon"></i>
+        <h3>Fashion Accessories</h3>
+        <p>Trending daily accessories, passport wallets, and card games.</p>
+      </div>
+    </div>
+  </section>
+
+  <!-- FEATURED PRODUCTS -->
+  <section id="featured">
+    <div class="section-header">
+      <h2 class="gold-text">Featured Products</h2>
+      <p>Our top trending items available for instant pickup or delivery in Kampala.</p>
+    </div>
+
+    <div class="products-grid">
+      
+      <!-- Product 1 -->
+      <div class="product-card">
+        <div class="product-image">
+          <img src="https://www.image2url.com/r2/default/images/1790076826485-fa7310c4-155e-4290-9cac-75c7475594d9.jpg" alt="Kids Saving Tins">
+        </div>
+        <div class="product-info">
+          <h3 class="product-title">10k Saving Boxes / Kids Saving Tins</h3>
+          <div class="product-price">10,000 UGX</div>
+          <a href="https://wa.me/256704217801?text=Hello,%20I%20would%20like%20to%20buy%20the%2010k%20Saving%20Box." target="_blank" class="btn btn-whatsapp">
+            <i class="fab fa-whatsapp"></i> Buy via WhatsApp
+          </a>
+        </div>
+      </div>
+
+      <!-- Product 2 -->
+      <div class="product-card">
+        <div class="product-image">
+          <img src="https://www.image2url.com/r2/default/images/1790077308053-41662fa2-5951-4dc4-950c-a418f21ccb80.jpg" alt="Double Layered Satin Bonnets">
+        </div>
+        <div class="product-info">
+          <h3 class="product-title">Double-Layered Satin Bonnets</h3>
+          <div class="product-price">20,000 UGX</div>
+          <a href="https://wa.me/256704217801?text=Hello,%20I%20would%20like%20to%20buy%20the%20Double-Layered%20Satin%20Bonnet." target="_blank" class="btn btn-whatsapp">
+            <i class="fab fa-whatsapp"></i> Buy via WhatsApp
+          </a>
+        </div>
+      </div>
+
+      <!-- Product 3 -->
+      <div class="product-card">
+        <div class="product-image">
+          <img src="https://www.image2url.com/r2/default/images/1790075727014-e38f254c-659f-49e2-9bda-bf92f86d40ba.jpg" alt="Passport Wallets">
+        </div>
+        <div class="product-info">
+          <h3 class="product-title">Luxury Passport Wallets</h3>
+          <div class="product-price">20,000 - 35,000 UGX</div>
+          <a href="https://wa.me/256704217801?text=Hello,%20I%20would%20like%20to%20buy%20a%20Passport%20Wallet." target="_blank" class="btn btn-whatsapp">
+            <i class="fab fa-whatsapp"></i> Buy via WhatsApp
+          </a>
+        </div>
+      </div>
+
+      <!-- Product 4 -->
+      <div class="product-card">
+        <div class="product-image">
+          <img src="https://www.image2url.com/r2/default/images/1790077563839-6e19ade8-731d-468f-a591-70959226366c.jpg" alt="Reusable Money Tracking Saving Box">
+        </div>
+        <div class="product-info">
+          <h3 class="product-title">Reusable Money Tracking Saving Box</h3>
+          <div class="product-price">55,000 UGX</div>
+          <a href="https://wa.me/256704217801?text=Hello,%20I%20would%20like%20to%20buy%20the%20Reusable%20Money%20Tracking%20Saving%20Box." target="_blank" class="btn btn-whatsapp">
+            <i class="fab fa-whatsapp"></i> Buy via WhatsApp
+          </a>
+        </div>
+      </div>
+
+      <!-- Product 5 -->
+      <div class="product-card">
+        <div class="product-image">
+          <img src="https://www.image2url.com/r2/default/images/1790077851249-6c900106-55c4-4c66-9ac9-706cb6216a9a.jpg" alt="Game Cards">
+        </div>
+        <div class="product-info">
+          <h3 class="product-title">Interactive Game Cards Set</h3>
+          <div class="product-price">30,000 - 75,000 UGX</div>
+          <a href="https://wa.me/256704217801?text=Hello,%20I%20would%20like%20to%20buy%20the%20Game%20Cards." target="_blank" class="btn btn-whatsapp">
+            <i class="fab fa-whatsapp"></i> Buy via WhatsApp
+          </a>
+        </div>
+      </div>
+
+    </div>
+  </section>
+
+  <!-- LOCATION & CONTACT SECTION -->
+  <section id="contact">
+    <div class="section-header">
+      <h2 class="gold-text">Visit or Contact Us</h2>
+      <p>Drop by our store in Kampala or reach out directly for instant orders.</p>
+    </div>
+
+    <div class="contact-container">
+      <div class="contact-info">
+        <div class="contact-item">
+          <i class="fas fa-map-marker-alt"></i>
+          <div>
+            <h4>Physical Address</h4>
+            <p>Center Point, Level 5, Room GW 21<br>Kampala, Uganda</p>
+          </div>
+        </div>
+
+        <div class="contact-item">
+          <i class="fas fa-phone-alt"></i>
+          <div>
+            <h4>Phone & WhatsApp</h4>
+            <p><a href="tel:+256704217801">+256 704 217 801</a></p>
+          </div>
+        </div>
+
+        <div class="contact-item">
+          <i class="fas fa-clock"></i>
+          <div>
+            <h4>Working Hours</h4>
+            <p>Monday - Saturday: 8:30 AM - 7:00 PM</p>
+          </div>
+        </div>
+
+        <div>
+          <h4>Follow Us</h4>
+          <div class="social-links">
+            <a href="https://www.tiktok.com/@gina.scents.and.a?_r=1&_t=ZS-99waMzlqGyS" target="_blank" class="social-btn" aria-label="TikTok">
+              <i class="fab fa-tiktok"></i>
+            </a>
+            <a href="https://wa.me/256704217801" target="_blank" class="social-btn" aria-label="WhatsApp">
+              <i class="fab fa-whatsapp"></i>
+            </a>
+          </div>
+        </div>
+      </div>
+
+      <!-- GOOGLE MAP IFRAME -->
+      <div class="map-container">
+        <iframe 
+          title="Gina Scents Location"
+          src="https://maps.google.com/maps?q=8H7H%2B65%20Kampala&t=&z=15&ie=UTF8&iwloc=&output=embed" 
+          allowfullscreen="" 
+          loading="lazy">
+        </iframe>
+      </div>
+    </div>
+  </section>
+
+  <!-- FOOTER -->
+  <footer>
+    <p>&copy; 2026 Gina Scents and Accessories. All Rights Reserved. Center Point, Kampala, Uganda.</p>
+  </footer>
+
+  <!-- SIDEBAR TOGGLE SCRIPT -->
+  <script>
+    function toggleSidebar() {
+      const sidebar = document.getElementById('sidebarMenu');
+      const overlay = document.getElementById('sidebarOverlay');
+      sidebar.classList.toggle('active');
+      overlay.classList.toggle('active');
+    }
+  </script>
+
+</body>
+</html>
